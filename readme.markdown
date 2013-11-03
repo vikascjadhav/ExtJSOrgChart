@@ -3,115 +3,88 @@
 
 ##Overview
 
-Follow me [@wesnolte](http://twitter.com/wesnolte)
-
-jQuery OrgChart is a plugin that allows you to render structures with nested elements in a easy-to-read tree structure. To build the tree all you need is to make a single line call to the plugin and supply the HTML element Id for a nested unordered list element that is representative of the data you'd like to display. If drag-and-drop is enabled you'll be able to reorder the tree which will also change the underlying list structure. 
+Ext JS OrgChart is a plugin that allows you to render structures with nested elements in a easy-to-read tree structure. To build the tree all you need is to make a single line call to the plugin and supply the root element of tree structure prepared in Javascript Objects. This plugin has been adopted from [jOrgChart plugin](https://github.com/wesnolte/jOrgChart) prepared by [@wesnolte](http://twitter.com/wesnolte)
 
 Features include:
 
-* Very easy to use given a nested unordered list element.
-* Drag-and-drop functionality allows reordering of the tree and underlying `<ul>` structure.
-* Showing/hiding a particular branch of the tree by clicking on the respective node.
-* Nodes can contain any amount of HTML except `<li>` and `<ul>`.
+* Very easy to use javascript object tree structure.
+* Objects can be filled up based on required logic, plugin will take care of rendering tree structure.
+* Object structure allows to fill in data from any external source. E.g. json objects
+* Nodes can contain any amount of HTML.
 * Easy to style.
-* You can specify that sub-trees should start collapsed, which is useful for very large trees
+* HTML rendered in the nodes can have qtip markup so that easy QuickTip can be provided
+* Works with IE8+, Chrome 30+ and FF 25+
+* Tested with Ext JS 3.4.0
 
-![jQuery OrgChart](http://i.imgur.com/T8kKA.png "jQuery OrgChart")
+
+![Ext JS OrgChart](http://i.imgur.com/iKKjWs9.png "Ext JS OrgChart")
 
 ----
 
 ##Expected Markup & Example Usage
 
-To get up and running you'll need a few things. 
+To get up and running you'll need very few things. 
 
 -----
 
 ###The JavaScript Libraries & CSS
 
-You need to include the jQuery as well as the jOrgChart libraries. For example:
+You need to include the Ext JS as well as the Ext JS OrgChart libraries. For example:
 
-	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js"></script>
-	<script type="text/javascript" src="jquery.jOrgChart.js"></script>
-	
-If you want to use the drag-and-drop functionality you'll need to include jQuery UI too:
+	<script type='text/javascript' src='http://cdn.sencha.io/ext-3.4.0/adapter/ext/ext-base.js'></script>
+	script type="text/javascript" src="http://cdn.sencha.io/ext-3.4.0/ext-all-debug.js"></script>
+	<script type="text/javascript" src="ExtJSOrgChart.js"></script>
 
-	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.9/jquery-ui.min.js"></script>
-	
+As part of Ext JS library you will require to include style sheets also. 
+
+	<link href="http://extjs-public.googlecode.com/svn/tags/extjs-3.4.0/release/resources/css/ext-all.css" rel="stylesheet" type="text/css" />
+
+In example I have used gray theme of Ext JS which is optional to include.
+
+	<link href="http://extjs-public.googlecode.com/svn/tags/extjs-3.4.0/release/resources/css/xtheme-gray.css" rel="stylesheet" type="text/css" />
+  
 The core CSS is necessary to perform some of the basic styling i.e.
 
-    <link rel="stylesheet" href="css/jquery.jOrgChart.css"/>
+    <link rel="stylesheet" href="css/ExtJSOrgChart.css"/>
+    <link rel="stylesheet" href="css/custom.css"/>
 
 ----
 
 ###The HTML
 
-You'll need to construct a nest unordered list that represents your node nesting. For example:
+You'll need to construct a nested object structure that represents your node nesting. For example below hard coded content is used to prepare tree node structure: 
 
-	<ul id="org" style="display:none">
-	<li>
-	  Food
-	  <ul>
-	    <li>Beer</li>
-	    <li>Vegetables
-	      <ul>
-	        <li>Pumpkin</li>
-	        <li><a href="http://tquila.com" target="_blank">Aubergine</a></li>
-	      </ul>
-	    </li>
-	    <li>Bread</li>
-	    <li>Chocolate
-	      <ul>
-	        <li>Topdeck</li>
-	        <li>Reese's Cups</li>
-	      </ul>
-	    </li>
-	  </ul>
-	</li>
-	</ul>
+	//prepare root node
+	var rootNode = new ExtJSOrgChart.createNode(1,"<a ext:qtip=\"<strong>This is a quick tip from markup!<br/>Add tooltip content as ext:qtip attribute in markup itself.<br/>It will load up as quick tip here.</strong>\" href='https://github.com/shaikhmshariq/ExtJSOrgChart'>Food</a>");
+	
+	//add child nodes under root node
+	rootNode.addChild(new ExtJSOrgChart.createNode(2,"Beer"));
+	rootNode.addChild(new ExtJSOrgChart.createNode(3,"Vegetables").addChild(new ExtJSOrgChart.createNode(3.1,"Pumpkin")).addChild(new ExtJSOrgChart.createNode(3.2,"<a href='https://github.com/shaikhmshariq/ExtJSOrgChart'>Aubergine</a><span><p>A link and a paragraph is all we need.</p></span>")).addChild(new ExtJSOrgChart.createNode(3.3,"Cucumber")));
+	rootNode.addChild(new ExtJSOrgChart.createNode(4,"Fruit").addChild(new ExtJSOrgChart.createNode(4.1,"Apple").addChild(new ExtJSOrgChart.createNode(4.10,"Granny Smith"))).addChild(new ExtJSOrgChart.createNode(4.2,"Berries").addChild(new ExtJSOrgChart.createNode(4.21,'<img src="images/raspberry.jpg" alt="Raspberry"/>'))));
 
-If you want a sub-tree to start off hidden, just add `class="collapsed"` to a list item (`<li>`). That list item will appear, but everything below it won't. For example:
-
-	<ul id="org" style="display:none">
-      <li>Food:
-        <ul>
-          <li>Beer</li>
-          <li class=collapsed>Vegetables
-            <ul>
-              <li>Carrot</li>
-              <li>Pea</li>
-            </ul>
-          </li>
-          <li>Chocolate</li>
-        </ul>
-      </li>
-    </ul>
-
-This plugin works by generating the tree as a series of nested tables. Each node in the tree is represented with `<div class="node">`. You can include any amount of HTML markup in your `<li>` **except** for other `<ul>` or `<li>` elements. Your markup will be used within the node's `<div>` element. Any classes you attach to the `<li>` elements will be copied to the associated node, allowing you to highlight particular parts of the tree. The special `collapsed` class described above doesn't get copied to the node.
+This plugin works by generating the tree as a series of nested tables. Each node in the tree is represented with `<div class="node">`. You can include any amount of HTML markup. Your markup will be used within the node's `<div>` element. Any classes you attach to the `<li>` elements will be copied to the associated node, allowing you to highlight particular parts of the tree.
 
 
 -----
 
-###The jQuery Call
+###The Ext JS Call
 
-And the cherry on the top is the usual call, often but not always on document load. You'll need to specify the Id of the list in this call. For example:
+And the cherry on the top is the usual call, often but not always on document load. You'll need to specify the Id of element in which you want to render the chart along with root object prepared from any external source. For example:
 
-	jQuery(document).ready(function() {
-	    $("#org").jOrgChart();
-	});
+	ExtJSOrgChart.prepareTree({
+		chartElement: 'chart',
+		rootObject: rootNode,
+		depth: -1
+	});	
 	
-This call will append the markup for the OrgChart to the `<body>` element by default, but you can specify this as part of the options.
+This call will append the markup for the OrgChart to the `chart` element by default.
 
-----
-
-##Demo
-
-You can view a demo of this [here](http://bit.ly/u1XhTf "jQuery OrgChart").
 
 ------
 
 ##Sourcecode
 
-Source code with an example is available [here](https://github.com/wesnolte/jOrgChart/tree/master/example "Example & Source").
+Source code with an example is available [here](https://github.com/shaikhmshariq/ExtJSOrgChart/archive/master.zip "Example & Source").
 
 -----
 
@@ -119,7 +92,6 @@ Source code with an example is available [here](https://github.com/wesnolte/jOrg
 
 There are only 3 configuration options.
 
-1. **chartElement** - used to specify which HTML element you'd like to append the OrgChart markup to. *[default='body']*
+1. **chartElement** - used to specify which HTML element you'd like to append the OrgChart markup to.
 2. **depth** - tells the code what depth to parse to. The default value of "-1" instructs it to parse like it's 1999. *[default=-1]*
-3. **chartClass** - the name of the style class that is assigned to the generated markup. *[default='jOrgChart']*
-4. **dragAndDrop** - determines whether the drag-and-drop feature of tree node elements is enabled. *[default=false]*
+4. **rootNode** - this should be root node prepared from external source through custom logic as per the requirement.

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <title>ExtJSOrgChart Demo - Getting data from external source</title>
+  <script type='text/javascript' src='http://cdn.sencha.io/ext-3.4.0/adapter/ext/ext-base.js'></script>
+  <script type="text/javascript" src="http://cdn.sencha.io/ext-3.4.0/ext-all-debug.js"></script>
+  <script type="text/javascript" src="ExtJSOrgChart.js"></script>
+  <link href="http://extjs-public.googlecode.com/svn/tags/extjs-3.4.0/release/resources/css/ext-all.css" rel="stylesheet" type="text/css" />
+  <link href="http://extjs-public.googlecode.com/svn/tags/extjs-3.4.0/release/resources/css/xtheme-gray.css" rel="stylesheet" type="text/css" />
+  <link rel="stylesheet" href="css/bootstrap.min.css"/>
+  <link rel="stylesheet" href="css/ExtJSOrgChart.css"/>
+  <link rel="stylesheet" href="css/custom.css"/>
+</head>
+<body>
+<div id="chart" class="orgChart"></div>
+<script type="text/javascript">
+window.onload=function(){
+	Ext.onReady(function () { 
+	
+		Ext.Ajax.request( {
+				url : 'response_sitemap.json',
+				method : "GET",
+				success : function(response, opts) {
+							var nodeList = new Array();
+							var data= Ext.decode(response.responseText);
+							data.sort(function(a,b){
+								return parseInt(a.parentId) - parseInt(b.parentId);
+							});
+							var rootNode = new ExtJSOrgChart.createNode(data[0].id,data[0].markup,data[0].parentId);
+							nodeList.push(rootNode);
+							for(var i=1;i<data.length;i++){
+									var nd = new ExtJSOrgChart.createNode(data[i].id,data[i].markup,data[i].parentId);
+									var found=false;
+									for(var k=0;k<nodeList.length;k++){
+										if(nodeList[k].getId()==data[i].parentId){
+											nodeList[k].addChild(nd);
+											found=true;
+											break;
+										}
+									}
+									if(found){
+										nodeList.push(nd);
+									}
+							}
+							
+							ExtJSOrgChart.prepareTree({
+								chartElement: 'chart',
+								rootObject: rootNode,
+								depth: -1
+							});	
+				} , 
+				failure : function(response, opts) {          
+					alert("Error while loading data : "+response.responseText);                  
+				}
+			});								
+	});
+}  
+</script>  
+</body>
+</html>

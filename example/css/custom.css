@@ -29,14 +29,18 @@ h1 {
 }
 
 a{
-	color 				: #E05E00;	
+	#color 				: #E05E00;	
+	color 				: #FFFF00;
 	text-decoration		: none;
 }
 
 a:hover{
 	text-decoration		: underline;
+	color			: white;
 }
-
+a{
+	text-decoration		: underline;
+}
 /* general */
 .clear {
 	clear: both;
@@ -70,18 +74,23 @@ a:hover{
 }
 
 /* Custom chart styling */
-.jOrgChart {
+.ExtJSOrgChart {
   margin                : 10px;
   padding               : 20px;
 }
 
 /* Custom node styling */
-.jOrgChart .node {
-	font-size 			: 14px;
+.ExtJSOrgChart .node {
+	font-size 			: 11x;
+	text-align			: center;
+	#vertical-align		: middle;
+	#line-height			: 50px;
 	background-color 	: #35363B;
 	border-radius 		: 8px;
-	border 				: 5px solid white;
-	color 				: #F38630;
+	border 				: 2px solid white;
+	#color 				: #F38630;
+	color 				: #FFFF00;
+	
 	-moz-border-radius 	: 8px;
 }
 	.node p{

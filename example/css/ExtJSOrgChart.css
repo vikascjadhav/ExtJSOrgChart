@@ -1,36 +1,36 @@
 /* Basic styling */
 /* Draw the lines */
-.jOrgChart .line {
+.ExtJSOrgChart .line {
   height                : 20px;
   width                 : 4px;
 }
 
-.jOrgChart .down {
+.ExtJSOrgChart .down {
   background-color 		: black;	
   margin 				: 0px auto;
 }
 
-.jOrgChart .top {
+.ExtJSOrgChart .top {
   border-top          : 3px solid black;
 }
 
-.jOrgChart .left {
+.ExtJSOrgChart .left {
   border-right          : 2px solid black;
 }
 
-.jOrgChart .right {
+.ExtJSOrgChart .right {
   border-left           : 2px solid black;
 }
 
 /* node cell */
-.jOrgChart td {
+.ExtJSOrgChart td {
   text-align            : center;
   vertical-align        : top;
   padding               : 0;
 }
 
 /* The node */
-.jOrgChart .node {
+.ExtJSOrgChart .node {
   background-color 		: #35363B;
   display               : inline-block;
   width                 : 96px;
