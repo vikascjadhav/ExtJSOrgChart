@@ -13,6 +13,9 @@ Features include:
 * Nodes can contain any amount of HTML.
 * Easy to style.
 * HTML rendered in the nodes can have qtip markup so that easy QuickTip can be provided
+
+Works with:
+
 * Works with IE8+, Chrome 30+ and FF 25+
 * Tested with Ext JS 3.4.0
 
