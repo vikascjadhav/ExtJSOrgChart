@@ -71,8 +71,8 @@ ExtJSOrgChart.buildNode= function (node, appendTo, level, opts) {
     var tbodyObj = Ext.DomHelper.append(tableObj, "<tbody/>");
 
     // Construct the node container(s)
-    var nodeRow = Ext.get(Ext.DomHelper.append(tbodyObj, "<tr/>")).addClass("node-cells");
-    var nodeCell = Ext.get(Ext.DomHelper.append(nodeRow, "<td colspan='2' />")).addClass("node-cell");
+    var nodeRow = Ext.get(Ext.DomHelper.append(tbodyObj, "<tr/>")).addCls("node-cells");
+    var nodeCell = Ext.get(Ext.DomHelper.append(nodeRow, "<td colspan='2' />")).addCls("node-cell");
 	
     var childNodes = node.getChildNodes();
     var nodeDiv;
@@ -82,7 +82,7 @@ ExtJSOrgChart.buildNode= function (node, appendTo, level, opts) {
     }
     // Draw the node
     var nodeContent=node.getMarkup();
-    nodeDiv = Ext.get(Ext.DomHelper.append(nodeCell,"<div>")).addClass("node");
+    nodeDiv = Ext.get(Ext.DomHelper.append(nodeCell,"<div>")).addCls("node");
 	
     nodeDiv.dom.innerHTML=nodeContent;
     
@@ -93,18 +93,18 @@ ExtJSOrgChart.buildNode= function (node, appendTo, level, opts) {
             var downLineCell = Ext.DomHelper.append(downLineRow,"<td/>");
 			downLineCell.setAttribute('colspan',childNodes.length * 2);
             // draw the connecting line from the parent node to the horizontal line 
-            downLine = Ext.get(Ext.DomHelper.append(downLineCell,"<div></div>")).addClass("line down");
+            downLine = Ext.get(Ext.DomHelper.append(downLineCell,"<div></div>")).addCls("line down");
 	
 			// Draw the horizontal lines
             var linesRow = Ext.DomHelper.append(tbodyObj,"<tr/>");
             Ext.each(childNodes,function (item,index) {
-                var left = Ext.get(Ext.DomHelper.append(linesRow,"<td>&nbsp;</td>")).addClass("line left top");
-                var right = Ext.get(Ext.DomHelper.append(linesRow,"<td>&nbsp;</td>")).addClass("line right top");
+                var left = Ext.get(Ext.DomHelper.append(linesRow,"<td>&nbsp;</td>")).addCls("line left top");
+                var right = Ext.get(Ext.DomHelper.append(linesRow,"<td>&nbsp;</td>")).addCls("line right top");
             });
 
             // horizontal line shouldn't extend beyond the first and last child branches
-            Ext.select("td:first",false,linesRow).removeClass("top");
-            Ext.select("td:last",false,linesRow).removeClass("top");
+            Ext.select("td:first",false,linesRow).removeCls("top");
+            Ext.select("td:last",false,linesRow).removeCls("top");
                 
 
             var childNodesRow = Ext.DomHelper.append(tbodyObj,"<tr/>");
