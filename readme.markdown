@@ -17,9 +17,7 @@ Features include:
 Works with:
 
 * Works with IE8+, Chrome 30+ and FF 25+
-* Tested with Ext JS 3.4.0
-
-
+* Tested with Ext JS 3. 4.2
 ![Ext JS OrgChart](http://i.imgur.com/iKKjWs9.png "Ext JS OrgChart")
 
 ----
