@@ -80,7 +80,7 @@ This call will append the markup for the OrgChart to the `chart` element by defa
 
 ##Sourcecode
 
-Source code with an example is available [here](https://github.com/shaikhmshariq/ExtJSOrgChart/archive/master.zip "Example & Source").
+Original source code:-  [here](https://github.com/shaikhmshariq/ExtJSOrgChart/archive/master.zip "Example & Source").
 
 -----
 
