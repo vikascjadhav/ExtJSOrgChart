@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <title>ExtJSOrgChart Demo - Static data in js</title>
+
+  <script type="text/javascript" src="http://cdn.sencha.com/ext/gpl/4.2.0/ext-all.js"></script>
+  <script type="text/javascript" src="ExtJSOrgChart.js"></script>
+  <link href="http://cdn.sencha.com/ext/gpl/4.2.0/resources/css/ext-all.css" rel="stylesheet" type="text/css" />
+/>
+  <link rel="stylesheet" href="css/bootstrap.min.css"/>
+  <link rel="stylesheet" href="css/ExtJSOrgChart.css"/>
+  <link rel="stylesheet" href="css/custom.css"/>
+</head>
+<body>
+<div id="chart" class="orgChart"></div>
+<script type="text/javascript">
+window.onload=function(){
+	Ext.onReady(function () { 
+
+			//preparing data structure manually
+			var rootNode = new ExtJSOrgChart.createNode(1,"<a ext:qtip=\"<strong>This is a quick tip from markup!<br/>Add tooltip content as ext:qtip attribute in markup itself.<br/>It will load up as quick tip here.</strong>\" href='https://github.com/shaikhmshariq/ExtJSOrgChart'>Food</a>");
+			rootNode.addChild(new ExtJSOrgChart.createNode(2,"Beer"));
+			rootNode.addChild(new ExtJSOrgChart.createNode(3,"Vegetables").addChild(new ExtJSOrgChart.createNode(3.1,"Pumpkin")).addChild(new ExtJSOrgChart.createNode(3.2,"<a href='https://github.com/shaikhmshariq/ExtJSOrgChart'>Aubergine</a><span><p>A link and a paragraph is all we need.</p></span>")).addChild(new ExtJSOrgChart.createNode(3.3,"Cucumber")));
+			rootNode.addChild(new ExtJSOrgChart.createNode(4,"Fruit").addChild(new ExtJSOrgChart.createNode(4.1,"Apple").addChild(new ExtJSOrgChart.createNode(4.10,"Granny Smith"))).addChild(new ExtJSOrgChart.createNode(4.2,"Berries").addChild(new ExtJSOrgChart.createNode(4.21,'<img src="images/raspberry.jpg" alt="Raspberry"/>'))));
+			
+			ExtJSOrgChart.prepareTree({
+				chartElement: 'chart',
+				rootObject: rootNode,
+				depth: -1
+			});							
+	});
+}  
+</script>  
+</body>
+</html>
