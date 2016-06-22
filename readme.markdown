@@ -2,8 +2,8 @@
 
 
 ###Live URLS
-example1 -> https://vikascjadhav.github.io/ExtJSOrgChart/example/example1.html
-example2 -> https://vikascjadhav.github.io/ExtJSOrgChart/example/example2.html
+* example1 -> https://vikascjadhav.github.io/ExtJSOrgChart/example/example1.html
+* example2 -> https://vikascjadhav.github.io/ExtJSOrgChart/example/example2.html
 ##Overview
 
 Ext JS OrgChart is a plugin that allows you to render structures with nested elements in a easy-to-read tree structure. To build the tree all you need is to make a single line call to the plugin and supply the root element of tree structure prepared in Javascript Objects. This plugin has been adopted from [jOrgChart plugin](https://github.com/wesnolte/jOrgChart) prepared by [@wesnolte](http://twitter.com/wesnolte)
