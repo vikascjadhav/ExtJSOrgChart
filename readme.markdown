@@ -35,18 +35,10 @@ To get up and running you'll need very few things.
 
 You need to include the Ext JS as well as the Ext JS OrgChart libraries. For example:
 
-	<script type='text/javascript' src='http://cdn.sencha.io/ext-3.4.0/adapter/ext/ext-base.js'></script>
-	script type="text/javascript" src="http://cdn.sencha.io/ext-3.4.0/ext-all-debug.js"></script>
-	<script type="text/javascript" src="ExtJSOrgChart.js"></script>
+  <script type="text/javascript" src="https://cdn.sencha.com/ext/gpl/4.2.0/ext-all.js"></script>
+  <script type="text/javascript" src="ExtJSOrgChart.js"></script>
+  <link href="https://cdn.sencha.com/ext/gpl/4.2.0/resources/css/ext-all.css" rel="stylesheet" type="text/css" />
 
-As part of Ext JS library you will require to include style sheets also. 
-
-	<link href="http://extjs-public.googlecode.com/svn/tags/extjs-3.4.0/release/resources/css/ext-all.css" rel="stylesheet" type="text/css" />
-
-In example I have used gray theme of Ext JS which is optional to include.
-
-	<link href="http://extjs-public.googlecode.com/svn/tags/extjs-3.4.0/release/resources/css/xtheme-gray.css" rel="stylesheet" type="text/css" />
-  
 The core CSS is necessary to perform some of the basic styling i.e.
 
     <link rel="stylesheet" href="css/ExtJSOrgChart.css"/>
